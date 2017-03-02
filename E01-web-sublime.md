@@ -1,29 +1,52 @@
-title: 编程环境安装配置
-
-author:
-  name: LI YANG
-  url: http://mooc1.chaoxing.com/course/87155873.html
-output: E01-web-sublime.html
+title: E01. 编程环境安装配置
+speaker: LI YANG
+transition: slide3
+files: /js/demo.js,/css/demo.css
+theme: moon
+usemathjax: yes
 --
 # 编程环境安装配置
 
 --
-### 安装Sublime Text
-安装过程比较简单,直接安装或者下载portable version解压。
-
+### 安装Sublime Text3
+根据系统不同，直接安装或者下载portable version解压。
 
 --
 ### 安装包控制器（package control）
-* 只有安装了包控制器（package control）才能安装各种神队友的插件。首先按Ctrl+~呼出命令控制器。
+* 只有安装了包控制器（package control）才能安装各种插件。首先按`Ctrl + ~`呼出命令控制器。
 
-* 然后将下面的命令复制到命令栏中后按回车。看到成功的提示重启就能看到Package Control了。
->命令如下：
-import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
+* 然后将下面的命令复制到命令栏中后按回车，看到成功的提示重启就能看到Package Control了。
+>命令如下：  
+import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 
 --
 ### 安装插件
-* Sublime Text 2.0.2的一大优势就是它拥有一大堆神队友的插件，例如Emmet、SublimeLinter、jQuery等插件。这里以安装Emmet插件演示！打开Package Control，会加载一小伙，所以耐心等一下。别做多余操作，不然包控制器的界面会消失的。
-* 点install Package，同样需要加载。出来后再命令栏上输入Emmet，点第一个就开始安装Emmet插件，跳出Emmet信息界面就证明安装成功！
+- 打开`Command Palette`(Ctrl+Shift+p)，选择 `Package Control: Install Package`;
+- 出来后再命令栏上输入Emmet，点第一个就开始安装Emmet插件，跳出Emmet信息界面就证明安装成功！
+
+推荐安装的插件如下：
+```
+1. emmet 
+2. BracketHighLight
+3. Color HightLight
+4. CSS Format
+5. Js Format
+6. HtmlBeautify
+7. Sublime Tmpl
+8. ConvertToUTF8
+9. JQuery Snippets pack
+```
+
+
+-- 
+### 安装同步服务器
+1. 安装node程序，目前最新版本是v7.6.0 Current
+2. 安装browser-sync程序，命令` npm i -g browser-sync`
+3. 进入网站根目录，启动服务器：
+```
+browser-sync start --server --files "."
+```
+
 
 --
 ### SublimeText 快捷键
