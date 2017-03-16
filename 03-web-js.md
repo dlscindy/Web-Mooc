@@ -79,10 +79,11 @@ function myFunction()
 </body>
 </html>
 ```
+
 --
-### 操作 HTML 元素
-如需从 JavaScript 访问某个 HTML 元素，您可以使用 ``document.getElementById(id) ``方法。
-请使用 "id" 属性来标识 HTML 元素
+### getElementById
+可以使用` document.getElementById(id) `方法，取得HTML元素，其传入参数为元素的` id `属性
+
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -95,6 +96,29 @@ function myFunction()
 </body>
 </html>
 ```
+
+--
+### querySelector && querySelectorAll
+W3C Selectors API在HTML5中定义了`querySelector`和`querySelectorAll`函数，可以通过` css selector `字符串来获取HTML元素，不同的是 `querySelector` 返回的是一个对象， `querySelectorAll` 返回的一个集合 `NodeList` 。
+```js
+//取出body节点
+var body = document.querySelector("body");
+
+//返回id为k的节点
+var k = document.querySelector("#k");
+var k = document.querySelectorAll("#k")[0];
+
+//返回id为k的节点下的第一个span节点
+var k = document.querySelector("#k span");
+var k = document.querySelector("#k").querySelector("span");
+
+//返回class为box的div
+var box = document.querySelectorAll("div.box");
+
+```
+
+
+
 --
 ### 警告
 请使用 document.write() 仅仅向文档输出写内容。
@@ -577,3 +601,5 @@ alert("X 坐标: " + x + ", Y 坐标: " + y)
 </body>
 </html>
 ```
+
+

@@ -194,7 +194,7 @@ var items = [12, 548 ,'a' , 2 , 5478 , 'foo' , 8852, , 'Doe' ,2154 , 119 ];
 items.length; // return 11 
 items.splice(3,1) ; 
 items.length; // return 10 
-/* items 结果为 [12, 548, "a", 5478, "foo", 8852, undefined × 1, "Doe", 2154, 119]
+// items 结果为 [12, 548, "a", 5478, "foo", 8852, undefined × 1, "Doe", 2154, 119]
 //删除对象的属性时可以使用delete。
 ```
 
