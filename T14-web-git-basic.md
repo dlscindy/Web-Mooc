@@ -23,6 +23,7 @@ $ git config --global user.email "xxx@xxx.xxx"
 //在上面的两个引号中分别填写你的名字和邮箱。
 //由于Git是分布式的版本控制系统，可能会有很多用户，每个用户需要有自己的名字和邮箱来互相区分。
 ```
+设置完毕后，可以通过命令行  `git config -l` 查看全局配置信息
 
 --
 ### 创建版本库（repository）
@@ -163,7 +164,7 @@ Date:   Tue Apr 26 15:49:34 2016 +0800
 
 --
 ### 历史记录
-`git log` 命令给出了你的每一次提交，并按时间顺序依次显示，非常详细。但是有时候你只想要一个简单的结果，可以 `git log --pretty=oneline`
+`git log` 命令给出了你的每一次提交，并按时间顺序依次显示，非常详细。但是有时候你只想要一个简单的结果，可以 `git log --pretty=oneline` or `git log --oneline `--graph
 ```
 > git log --pretty=oneline
 e4af028a493a4459fea0c0f673149281e0d11949 add new line
@@ -229,7 +230,7 @@ M       readme.txt
 
 --
 ### 复杂修改恢复  CND.1
-#####第1种情况: 在工作区产生的修改还没有`git add`添加到暂存区。你当然可以直接打开编辑器改回到之前的样子，但我们希望Git来帮我们做这件事, 可以执行命令`git checkout -- file`
+#####第1种情况: 在工作区产生的修改还没有`git add`添加到暂存区。你当然可以直接打开编辑器改回到之前的样子，但我们希望Git来帮我们做这件事, 可以执行命令`git checkout file`
 
 > 比如你在readme.txt中新添加了一行文本 。
 ```js
@@ -239,7 +240,7 @@ just add line
 ```
 > 这时候就产生了一个修改，现在你后悔了，觉得不应该添加这一行。
 ```js
-$ git checkout -- readme.md
+$ git checkout readme.md
 ```
 > 输入完命令以后没有任何提示。没有提示证明你没错。
 这时你再打开readme.txt查看一下，发现刚才添加的`just add line`这一行已经没有了。
@@ -313,6 +314,30 @@ Changes to be committed:
  1 file changed, 1 deletion(-)
  delete mode 100644 new.txt
 ```
+
+
+--
+### Git状态转换
+通过上述命令可以理解git文件具有3种状态：
+
+- 没有暂存
+- 暂存准备提交
+- 已经提交
+
+<p><img src="img/webgit12.png" width="389" ></p> 
+
+因此文件有3种类型的重置，可以让文件回到git历史中的一个特定版本。
+```bash
+## 回退到某历史版本，丢弃提交之后的所有变更
+1. git reset –hard {{some-commit-hash}}     
+
+## 回退到某历史版本，将所有变更移动到没有暂存的状态，意味着需要git add . 和 git commit 才能将变更提交到仓库
+2. git reset {{some-commit-hash}}
+
+## 回退到某历史版本，将所有变更移动到暂存准备提交阶段，意味只要git commit 就可以将变更提交到仓库
+3. git reset –soft {{some-commit-hash}} 
+```
+
 
 --
 ### 创建GitHub帐号  Part.1

@@ -117,7 +117,20 @@ var box = document.querySelectorAll("div.box");
 
 ```
 
+### addEventListener 动态绑定事件函数
+下面的范例通过addEventListener，将所有的td元素的click事件绑定到showMsg函数。
+```js
+var tdList = document.querySelectorAll('td');
+for(i = 0; i < tdList.length; i++) {
+    var item = tdList[i];
+    item.addEventListener('click', showMsg)
+}
 
+function showMsg(e) {
+    var item = e.target
+    console.log(item.innerHTML);
+}
+```
 
 --
 ### 警告
