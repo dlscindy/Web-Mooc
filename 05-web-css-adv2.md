@@ -179,6 +179,16 @@ inline对象设置属性height和width是没有用的，致使它变宽变大的
 <p><img src="img/webcss24.png" width="725" ></p>
 
 --
+### 将多出部分显示为省略号
+```css
+.div {
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+}
+```
+
+--
 ### 清除浮动原理图
 <p><img src="img/webcss25.png" width="560" ></p>
 
@@ -210,7 +220,7 @@ OR
 
 --
 ### 清除浮动的方法3
-* 将父容器的overflow设为 hidden或auot就可以在标准兼容浏览器中闭合浮动元素.   
+* 将父容器的overflow设为 hidden或auto就可以在标准兼容浏览器中闭合浮动元素.   
  
 >>缺点：使用overflow的时候，可能会对页面表现带来影响，而且这种影响是不确定的；必须在多个浏览器上测试你的页面.
 
