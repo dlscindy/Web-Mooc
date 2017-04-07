@@ -3,7 +3,7 @@ title: CSS布局
 author:
   name: LI YANG
   url: http://mooc1.chaoxing.com/course/87155873.html
-output: T14-web-css-layout.html
+output: T23-web-css-layout.html
 
 --
 #  CSS布局

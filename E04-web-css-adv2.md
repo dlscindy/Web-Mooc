@@ -6,11 +6,11 @@ author:
 output: E04-web-css-adv2.htmls
 
 --
-## 实验4 排列基本练习  
-> 1. 根据CSS的Position和Float模型编写HTML页面
+## 实验4 FLEX布局基本练习  
+> 1. 使用Flex模型编写HTML页面
 <p><img src="img/e04-1.png"></p>
 
-> 2. 根据CSS的Display和Clear模型编写HTML页面
+> 2. 使用Flex模型编写HTML页面
 <p><img src="img/e04-2.png"></p>
 
 > 3. 根据步骤2的页面，实现下图的页面布局
