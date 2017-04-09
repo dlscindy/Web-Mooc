@@ -29,7 +29,7 @@ output: T23-web-css-layout.html
 
 - 父元素高度一定，子元素为单行内联文本：设置父元素的height等于行高`line-height`
 - 父元素高度一定，子元素为多行内联文本：设置父元素的 `display:table-cell` 或 `inline-block` ，再设置vertical-align:middle;
-- 块状元素：设置子元素 `position:fixed（absolute）` `margin:auto`
+- 块状元素：设置子元素 `left: 50%` `top: 50%` `transform:translate(-50%,-50%)`
 - flex布局：给父元素设置 `display:flex;` `align-items:center;`
 
 

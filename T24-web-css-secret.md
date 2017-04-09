@@ -400,9 +400,120 @@ box-shadow: `x-offset` `y-offset` `blur`  `expand-radius` `color`
 
 --
 ### 18. 毛玻璃效果
+- 将box容器和filter元素的背景都设置为同一张图片；
+- 设置filter元素的 `position: relative;`  `overflow: hidden;`  `z-index: 0;`
+- 设置filter元素的伪元素`before`为绝对定位，并且大小与其相等，加上`blur`滤镜，同时设置`margin`为一个较大的负值，最后将其`z-index`设置为负；
+
+<p><img src="img/websecret15.png" alt=""></p>
+```css
+.box, .filter:before {
+    background: url("../img/bak.jpg") 0 / cover fixed; 
+}
+
+.box {
+    height: 300px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter {
+    width: 300px;
+    height: 200px;
+    position: relative; 
+    overflow: hidden; 
+    z-index: 0;
+}
+
+.filter:before { 
+    content: ' '; 
+    position: absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    filter: blur(20px); 
+    margin: -30px; 
+    z-index: -1;
+}
+
+```
 
 -- 
 ### 19. 折角效果 
+<p><img src="img/websecret16.png" alt=""></p>
+```css
+.box .note1, .box .note2 {
+    width: 200px;
+    height: 100px;
+}
+
+.note1 { 
+    position: relative; 
+    background: #58a; /* 回退样式 */ 
+    background: 
+        linear-gradient(-150deg, 
+            transparent 1.5em, #58a 0); 
+    border-radius: .5em; 
+} 
+.note1::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; 
+    background: linear-gradient(to left bottom, 
+        transparent 50%, rgba(0,0,0,.2) 0, rgba(0,0,0,.4)) 
+        100% 0 no-repeat; 
+    width: 1.73em; 
+    height: 3em; 
+    transform: translateY(-1.3em) rotate(-30deg); 
+    transform-origin: bottom right; 
+    border-bottom-left-radius: inherit; 
+    box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.15); 
+}
+
+.note2 {
+    background: #08a;
+    background: 
+    linear-gradient(to left bottom, 
+        transparent 50%, rgba(0,0,0,.4) 0) 
+        no-repeat 100% 0 / 2em 2em, 
+    linear-gradient(-135deg, 
+        transparent 1.5em, #58a 0);
+    @include a(#ff7700);
+}
+
+// 最终包装成函数
+@mixin folded-corner($background, $size, 
+                     $angle: 30deg) { 
+position: relative; 
+background: $background; /* 回退样式 */ 
+background: 
+    linear-gradient($angle - 180deg, 
+        transparent $size, $background 0); 
+border-radius: .5em; 
+ 
+$x: $size / sin($angle); 
+$y: $size / cos($angle); 
+ 
+&::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; right: 0; 
+    background: linear-gradient(to left bottom, 
+        transparent 50%, rgba(0,0,0,.2) 0, 
+        rgba(0,0,0,.4)) 100% 0 no-repeat; 
+    width: $y; height: $x; 
+    transform: translateY($y - $x) 
+               rotate(2*$angle - 90deg); 
+    transform-origin: bottom right; 
+    border-bottom-left-radius: inherit; 
+    box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.
+} 
+} 
+ 
+/* 当调用时... */ 
+.note { 
+    @include folded-corner(#58a, 2em, 40deg); 
+}
+```
 
 --
 ### 20. 连字符断行 
@@ -410,19 +521,62 @@ box-shadow: `x-offset` `y-offset` `blur`  `expand-radius` `color`
 
 --
 ### 21. 插入换行 
+- 通过"\000A"或简化为"\A"来设置换行
+- 设置 `white-space: pre` 保留源代码中的空白符和换行
+- 通过 `dt:not(:ﬁrst-child)`  或者 `dt ~ dt` 或者 `dd + dt` 定义换行
 
+<p><img src="img/websecret17.png" alt=""></p>
+```css
+.box {
+    background: #58a;
+    color: #fff;
+    padding: 20px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+dt, dd { 
+    display: inline; 
+    margin: 0
+}
+
+dd + dt::before { 
+    content: '\A'; 
+    white-space: pre; 
+} 
+ 
+dd + dd::before { 
+    content: ', '; 
+    font-weight: normal; 
+}
+```
 --
 ### 22. 文本行的斑马条纹 
-
+<p><img src="img/websecret18.png" alt=""></p>
+```css
+textarea {
+    padding: 0;
+    line-height: 1.55;
+    background: #eee;
+    background-size: auto 3em;
+    background-origin: content-box;
+    background-image: linear-gradient(rgba(0,0,0,.2) 50%, transparent 0);
+}
+```
 --
 ### 23. 调整 tab 的宽度 
-
+```css
+pre { 
+    tab-size: 2; 
+}
+```
 --
 ### 24. 连字 
-
+略
 
 --
 ### 25. 华丽的 & 符号 
+略
 
 --
 ### 26. 自定义下划线 
@@ -434,6 +588,7 @@ box-shadow: `x-offset` `y-offset` `blur`  `expand-radius` `color`
 
 --
 ### 28. 环形文字 
+略
 
 --
 ### 29. 选用合适的鼠标光标 
@@ -445,28 +600,95 @@ box-shadow: `x-offset` `y-offset` `blur`  `expand-radius` `color`
 
 --
 ### 31. 自定义复选框 
-
+<p><img src="img/websecret21.png" alt=""></p>
+```css
+input[type="checkbox"] { 
+    position: absolute; 
+    clip: rect(0,0,0,0); 
+}
+input[type="checkbox"] + label::before { 
+    content: '\a0'; /* 不换行空格 */ 
+    display: inline-block; 
+    vertical-align: .2em; 
+    width: 1em; 
+    height: 1em; 
+    margin-right: .5em; 
+    border-radius: .2em; 
+    background: silver; 
+    text-indent: .15em; 
+    line-height: .65; 
+}
+input[type="checkbox"]:checked + label::before { 
+    content: '\2713'; 
+    background: yellowgreen; 
+}
+```
 --
 ### 32. 通过阴影来弱化背景 
+没有给出完美方案
 
 --
 ### 33. 通过模糊来弱化背景 
+略
 
 --
 ### 34. 滚动提示 
+略
 
 --
 ### 36. 自适应内部元素 
-
+通过 `min-content`  设置容器内部最大的不可断行元素的宽度（即最宽的单词、图片或具有固定宽度的盒元素）
+<p><img src="img/websecret19.png" alt=""></p>
+```css
+figure { 
+    max-width: 300px; 
+    max-width: min-content; 
+    margin: auto; 
+} 
+```
 --
 ### 37. 精确控制表格列宽 
-
+对table-layout增加显示的可控性
+```css
+table { 
+    table-layout: fixed; 
+    width: 100%; 
+}
+```
 --
 ### 38. 根据兄弟元素的数量来设置
+-  `:only-child`  等价于 `:ﬁrst-child:last-child` ， 即第一项同时也是最后一项
+-  `:last-child` 等价于 `:nth-last-child(1)`
 
+1. 找到某元素即是父元素的第一个子元素，同时也是从后往前数的第N个子元素
+2. 用兄弟选择符`（~）`来命中它之后的所有兄弟元素：相当于在这个列表正好包含N个列表项
+时，命中它的每一项
+```css
+li:first-child:nth-last-child(n), 
+li:first-child:nth-last-child(n) ~ li { 
+    /* 当列表正好包含n项时，命中所有列表项 */ 
+}
+```
 --
 ### 39. 满幅的背景，定宽的内容 
+<p><img src="img/websecret20.png" alt=""></p>
+```css
+<!-- html代码 -->
+<footer> 
+    <p>The great Sir Adam Catlace was named after Countess Ada Lovelace, the first programmer. </p>
+</footer>
 
+<!-- css代码 -->
+footer {
+    background: #333; 
+    color: #fff;
+    padding: 1em calc(50% - 450px); 
+}
+
+footer p {
+    text-align: center;
+}
+```
 --
 ### 40. 垂直居中 
 - 通过 `translate()` 变形函数实现平移
@@ -504,20 +726,39 @@ main {
 --
 ### 41. 紧贴底部的页脚  
 
+```css
+<!-- html代码 -->
+<div class="main">...</div>
+<footer></footer>
+
+<!-- css代码 -->
+body { 
+    display: flex; 
+    flex-flow: column; 
+    min-height: 100vh; 
+} 
+main { flex: 1; }
+```
 --
 ### 42. 缓动效果 
+略
 
 --
 ### 43. 逐帧动画 
+略
 
 --
 ### 44. 闪烁效果 
+略
 
 --
 ### 45. 打字动画 
+略
 
 --
 ### 46. 状态平滑的动画 
+略
 
 --
 ### 47. 沿环形路径平移的动画 
+略
