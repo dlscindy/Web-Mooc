@@ -1,4 +1,4 @@
-title: HTML移动开发
+title: 移动端开发技术总结
 
 author:
   name: LI YANG
@@ -7,7 +7,7 @@ output: T03-web-html-mobile.html
 
 --
 # HTML MOBILE DEVELOPMENT
-## HTML移动开发
+## 移动端开发技术总结
 
 --
 ### 1、私有的meta标签

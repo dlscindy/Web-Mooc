@@ -90,11 +90,16 @@ $("#test").hide() - 隐藏所有 id="test" 的元素
 - 试图隐藏一个不存在的元素
 - 获得未完全加载的图像的大小
 ```js
+<!-- 经典方法 -->
 $(document).ready(function(){
-
---- jQuery functions go here ----
-
+  // logic 
 });
+
+<!-- 函数指针方法 -->
+$(init) 
+function init() {
+  //logic
+}
 ```
 
 --
@@ -168,6 +173,20 @@ $(selector).click(function)	//触发或将函数绑定到被选元素的点击�
 $(selector).dblclick(function)	//触发或将函数绑定到被选元素的双击事件  
 $(selector).focus(function)	//触发或将函数绑定到被选元素的获得焦点事件  
 $(selector).mouseover(function)	//触发或将函数绑定到被选元素的鼠标悬停事件  
+```
+
+--
+###  jQuery 事件处理
+jQuery支持多种事件处理机制
+
+- bind/unbind：将某事件（不）绑定到某个函数
+- delegate/undelegate：为某对象的某事件（不）指定处理函数
+- on/off：为某对象的某事件（不）指定处理函数
+
+```basic
+.bind( eventType , handler )
+.delegate( selector, eventType, handler )
+.on( eventType, selector , handler )
 ```
 
 --
