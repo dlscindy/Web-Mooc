@@ -61,6 +61,16 @@ output: T18-web-css-library.html
 
 
 --
+### Bootstrap 控件库
+> bootstrap风格的时间组件
+
+ [https://github.com/Eonasdan/bootstrap-datetimepicker](日期选择器)
+
+> 自增器组件
+
+[https://github.com/vsn4ik/jquery.spinner]()
+
+--
 ### JS控件库
 #### VueStrap
 > 轻量级移动开发库，相比Bootstrap来说，不需要jQuery支持。
